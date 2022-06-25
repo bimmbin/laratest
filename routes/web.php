@@ -14,8 +14,24 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/{tes}', [TestController::class, 'tes']);
+//laravel basic flow ---------------->route->controller->blade(view)
+
+
+
+Route::get('/', [TestController::class, 'tes']);
+
+//if form submitted (create)
+Route::post('/', [TestController::class, 'store']);
+
+
+//edit to get data, and render to input text
+//it works by using redirect-with method, then output in blade using session
+Route::get('/{id}', [TestController::class, 'edit']);
+
+//id in here is from edit action, by using the blade session->id
+//then updates the data by using save();
+Route::post('/{id}', [TestController::class, 'update']);
+
+//unique form method by laravel, gets the id then delete certain rows
+Route::delete('/{id}', [TestController::class, 'destroy']);
